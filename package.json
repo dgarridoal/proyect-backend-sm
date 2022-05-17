@@ -1,7 +1,7 @@
 {
-  "name": "name-api",
+  "name": "backend-sm-accesorios-api",
   "version": "1.0.0",
-  "description": "Plantilla de servidor en Express",
+  "description": "API dispuesta para pymes de accesoriso S&M",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
