@@ -5,7 +5,7 @@ const bdConnect = ()=>{
     mongoose.connect(DB_URI,{
         useNewUrlParser:true,
         useUnifiedTopology:true,
-        
+        useCreateIndex:true
     },
     (err,res)=>{
         if (!err) {
