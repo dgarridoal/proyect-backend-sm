@@ -7,13 +7,13 @@ const login = async (req, res) => {
     const { email, password } = req.body;
     await userModel.findOne({ email }, async (err, user) => {
       if (err) {
-        return res.status(500).send({
+        return res.status(400).json({
           status: false,
           message: "Error al obtener el usuario",
         });
       }
       if (!user) {
-        return res.status(400).send({
+        return res.status(400).json({
           status: false,
           message: "El usuario no existe",
         });
@@ -22,7 +22,7 @@ const login = async (req, res) => {
       const validPassword = bcrypt.compareSync(password, user.password);
 
       if (!validPassword) {
-        return res.status(400).send({
+        return res.status(400).json({
           status: false,
           message: "La contraseña es incorrecta",
         });
@@ -37,7 +37,7 @@ const login = async (req, res) => {
       });
     });
   } catch (error) {
-    return res.status(500).send({
+    return res.status(500).json({
       status: false,
       message: "Error al obtener el usuario",
     });
@@ -50,7 +50,7 @@ const register = async (req, res) => {
     const existeEmail = await userModel.findOne({ email: body.email });
 
     if (existeEmail) {
-      return res.status(400).send({
+      return res.status(400).json({
         status: false,
         message: "El email ya existe",
       });
@@ -63,7 +63,7 @@ const register = async (req, res) => {
 
     await user.save(async (err, userStored) => {
       if (err) {
-        return res.status(500).send({
+        return res.status(400).json({
           status: false,
           message: "Error al guardar el usuario",
         });
@@ -76,7 +76,7 @@ const register = async (req, res) => {
       });
     });
   } catch (error) {
-    return res.status(500).send({
+    return res.status(500).json({
       status: false,
       message: "Error al guardar el usuario",
     });
@@ -88,20 +88,20 @@ const changePassword = async (req, res) => {
     const { email, password } = req.body;
     await userModel.findOne({ email }, async (err, user) => {
       if (err) {
-        return res.status(500).send({
+        return res.status(400).json({
           status: false,
           message: "Error al obtener el usuario",
         });
       }
       if (!user) {
-        return res.status(400).send({
+        return res.status(400).json({
           status: false,
           message: "El usuario no existe",
         });
       }
       const validPassword = bcrypt.compareSync(password, user.password);
       if (!validPassword) {
-        return res.status(400).send({
+        return res.status(400).json({
           status: false,
           message: "La contraseña es incorrecta",
         });
@@ -109,7 +109,7 @@ const changePassword = async (req, res) => {
       user.password = password;
       await user.save((err, userStored) => {
         if (err) {
-          return res.status(500).send({
+          return res.status(400).json({
             status: false,
             message: "Error al guardar la contraseña del usuario",
           });
@@ -121,7 +121,7 @@ const changePassword = async (req, res) => {
       });
     });
   } catch (error) {
-    return res.status(500).send({
+    return res.status(500).json({
       status: false,
       message: "Error al cambiar la constraseña",
     });
