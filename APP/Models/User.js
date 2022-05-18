@@ -20,13 +20,14 @@ const accountSchema=Schema({
 
 },{
     timestamps:true,
-    versionKey:false
+    versionKey:false,
+    collection:'Account'
 }
 );
 
 accountSchema.method('toJSON', function() {
     const {_id,password,...object}=this.toObject();
-    object.uid=_id;
+    object.id=_id;
     return object;
 });
 

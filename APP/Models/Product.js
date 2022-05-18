@@ -1,40 +1,45 @@
-const {Schema,model} = require('mongoose');
+const { Schema, model } = require("mongoose");
 
-const productSchema=Schema({
-    codigoBarra:{
-        type: String,
-        required: true
+const productSchema = Schema(
+  {
+    codigoBarra: {
+      type: String,
+      required: true,
     },
-    nombre:{
-        type: String,
-        required: true
+    nombre: {
+      type: String,
+      required: true,
     },
-    descripcion:{
-        type: String,
+    descripcion: {
+      type: String,
     },
-    precioVenta:{
-        type: Number,
-        required: true
+    precioVenta: {
+      type: Number,
+      required: true,
     },
-    precioCompra:{
-        type: Number,
+    precioCompra: {
+      type: Number,
     },
-    fechaVencimiento:{
-        type: Date,
-        required: true
+    fechaVencimiento: {
+      type: Date,
+      required: true,
     },
-    fechaCompra:{
-        type: Date,
-        default: Date.now
-    },
-    categoria:{
+    categoria: [
+      {
         type: Schema.Types.ObjectId,
-    }
-
-},{
-    timestamps:true,
-    versionKey:false
-}
+        ref: "Categoria",
+      },
+    ],
+  },
+  {
+    timestamps: true,
+    versionKey: false,
+    collection: "Producto",
+  }
 );
-
-module.exports =model('Product',productSchema);
+productSchema.method('toJSON', function() {
+    const {_id,...object}=this.toObject();
+    object.id=_id;
+    return object;
+});
+module.exports = model("Producto", productSchema);
