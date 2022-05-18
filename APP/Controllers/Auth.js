@@ -1,100 +1,135 @@
 const userModel = require("../models/user");
+const bcrypt = require("bcryptjs");
+const { generarJwt } = require("../helpers/jwt");
 
-const login = (req, res) => {
+const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    userModel.findOne({ email }, (err, user) => {
+    await userModel.findOne({ email }, async (err, user) => {
       if (err) {
-        res.status(500).send({
+        return res.status(500).send({
           status: false,
           message: "Error al obtener el usuario",
         });
       }
       if (!user) {
-        res.status(400).send({
+        return res.status(400).send({
           status: false,
           message: "El usuario no existe",
         });
       }
-      //TODO: ver el hash de la constraseña
-      if (user.password !== password) {
-        res.status(400).send({
+
+      const validPassword = bcrypt.compareSync(password, user.password);
+
+      if (!validPassword) {
+        return res.status(400).send({
           status: false,
-          message: "El password es incorrecto",
+          message: "La contraseña es incorrecta",
         });
       }
-      res.status(200).json({
-        ok: true,
+
+      const token = await generarJwt(user.id);
+
+      return res.status(200).json({
+        status: true,
         user,
+        token
       });
     });
   } catch (error) {
-    res.status(500).send({
+    return res.status(500).send({
       status: false,
       message: "Error al obtener el usuario",
     });
   }
 };
-//TODO: arreglar el funcionamiento y agregar el hash de la contraseña
-const register = (req, res) => {
+const register = async (req, res) => {
   try {
     const { body } = req;
+
+    const existeEmail = await userModel.findOne({ email: body.email });
+
+    if (existeEmail) {
+      return res.status(400).send({
+        status: false,
+        message: "El email ya existe",
+      });
+    }
+
     const user = new userModel(body);
-    user.save((err, userStored) => {
+
+    const salt = bcrypt.genSaltSync(10);
+    user.password = bcrypt.hashSync(user.password, salt);
+
+    await user.save(async (err, userStored) => {
       if (err) {
-        res.status(500).send({
+        return res.status(500).send({
           status: false,
           message: "Error al guardar el usuario",
         });
       }
-      res.status(200).json({
-        ok: true,
+      const token = await generarJwt(user.id);
+      return res.status(200).json({
+        status: true,
         user: userStored,
+        token
       });
     });
   } catch (error) {
-    res.status(500).send({
+    return res.status(500).send({
       status: false,
       message: "Error al guardar el usuario",
     });
   }
 };
 
-const changePassword = (req, res) => {
+const changePassword = async (req, res) => {
   try {
     const { email, password } = req.body;
-    userModel.findOne({ email }, (err, user) => {
+    await userModel.findOne({ email }, async (err, user) => {
       if (err) {
-        res.status(500).send({
+        return res.status(500).send({
           status: false,
           message: "Error al obtener el usuario",
         });
       }
       if (!user) {
-        res.status(400).send({
+        return res.status(400).send({
           status: false,
           message: "El usuario no existe",
         });
       }
-      //TODO: ver el hash de la constraseña
+      const validPassword = bcrypt.compareSync(password, user.password);
+      if (!validPassword) {
+        return res.status(400).send({
+          status: false,
+          message: "La contraseña es incorrecta",
+        });
+      }
       user.password = password;
-      user.save((err, userStored) => {
+      await user.save((err, userStored) => {
         if (err) {
-          res.status(500).send({
+          return res.status(500).send({
             status: false,
             message: "Error al guardar la contraseña del usuario",
           });
         }
-        res.status(200).json({
-          ok: true,
+        return res.status(200).json({
+          status: true,
           user: userStored,
         });
       });
     });
   } catch (error) {
-    res.status(500).send({
+    return res.status(500).send({
       status: false,
       message: "Error al cambiar la constraseña",
     });
   }
+};
+
+module.exports = {
+  login,
+  register,
+  changePassword,
 };
