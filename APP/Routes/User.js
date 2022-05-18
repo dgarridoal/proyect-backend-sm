@@ -4,6 +4,10 @@ const {check}=require('express-validator');
 
 const { updateUser } = require('../Controllers/User');
 
+/**
+ * Ruta: /user
+ */
+
 router.put('update/:id',[
     check("email", "El email es obligatorio").not().isEmpty(),
 ],updateUser);
