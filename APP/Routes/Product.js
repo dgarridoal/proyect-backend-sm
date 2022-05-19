@@ -19,15 +19,7 @@ router.get("/", [validarJWT, validarCampos], getAllProducts);
 
 router.get("/:id", [validarJWT, validarCampos], getProductById);
 
-router.post(
-  "/",
-  [
-    validarJWT,
-    check("categoria", "Debe ser una categoría existente").isMongoId(),
-    validarCampos,
-  ],
-  createProduct
-);
+router.post("/", [validarJWT, validarCampos], createProduct);
 
 router.put("/:id", [validarJWT, validarCampos], updateProduct);
 

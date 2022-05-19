@@ -59,6 +59,7 @@ const createProduct = async (req, res) => {
       product,
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       status: false,
       message: "Error al guardar el producto",
