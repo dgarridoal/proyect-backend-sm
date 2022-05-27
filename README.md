@@ -11,23 +11,26 @@ _Se ha investigado distintos casos en las que las distintas pymes del país se e
 
 ### Pre-requisitos 📋
 
-_Es necesario conocimientos en distintos frameworks de Java y JavaScript para llevar a cabo el proyecto y así mismo en metodologías como lo es SCRUM para una mayor organización para el proyecto._
+_Es necesario conocimientos en distintos frameworks de JavaScript para llevar a cabo el proyecto y así mismo en metodologías como lo es SCRUM para una mayor organización para el proyecto._
 
 ---
 
 
 ## Ejecutando ⚙️
 
-_Se ha adjuntado ambas carpetas dentro de este repositorio, el cuál se da acceso a los archivos correspondientes del proyecto basado en frontend o backend._
+_Se ha adjunta distintos enlaces para ingresar a los dintintos repositorios, el cuál se da acceso a los archivos correspondientes del proyecto basado en frontend o backend._
 
+* [Frontend](https://github.com/ClaudioMacher/SistemaGestionDePyme) - Frontend
+* [Backend](#) - Backend
 
 
 ## Construido con 🛠️
 
-_Proyecto realizado en el framework **"Angular"** de forma modular para el frontend y **"Java Spring"** para el backend con el patrón **M.V.C.**._
+_Proyecto realizado en el framework **"Angular"** de forma modular para el frontend y **"NodeJs"** con la librería de **Express** para el backend con el patrón **M.V.C.** con rutas dinámicas._
 
 * [Angular](https://www.angular.io/) - Frontend
-* [Java Spring](https://www.spring.io/) - Backend
+* [NodeJs](https://nodejs.org/es/) - Backend
+  * [Express](https://expressjs.com/es/) - Backend
 
 
 
