@@ -8,6 +8,7 @@ const {
   createProduct,
   updateProduct,
   deleteProduct,
+  actualizarStock,
 } = require("../controllers/product");
 const { check } = require("express-validator");
 
@@ -24,5 +25,7 @@ router.post("/", [validarJWT, validarCampos], createProduct);
 router.put("/:id", [validarJWT, validarCampos], updateProduct);
 
 router.delete("/:id", [validarJWT, validarCampos], deleteProduct);
+
+router.put("/update-stock/:id", [validarJWT, validarCampos], actualizarStock);
 
 module.exports = router;

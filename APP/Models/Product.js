@@ -2,16 +2,16 @@ const { Schema, model } = require("mongoose");
 
 const productSchema = Schema(
   {
-    codigoBarra: {
-      type: String,
-      required: true,
-    },
-    nombre: {
+   nombre: {
       type: String,
       required: true,
     },
     descripcion: {
       type: String,
+    },
+    stock:{
+      type: Number,
+      default:0
     },
     precioVenta: {
       type: Number,
