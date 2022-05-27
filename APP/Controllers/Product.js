@@ -28,7 +28,7 @@ const getProductById = async (req, res) => {
     if (!product) {
       return res.status(400).json({
         status: false,
-        message: "El producto no existe",
+        message: "Error al obtener el producto",
       });
     }
     return res.status(200).json({
@@ -114,10 +114,45 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+const actualizarStock = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { stock } = req.body;
+    const product = await productModel.findById(id);
+    if (!product) {
+      return res.status(400).json({
+        status: false,
+        message: "El producto no existe",
+      });
+    }
+
+    product.stock = product.stock+ parseInt(stock) ;
+    const newProduct = await product.save();
+    if (!newProduct) {
+      return res.status(400).json({
+        status: false,
+        message: "Error al actualizar el stock",
+      });
+    }
+
+    return res.status(200).json({
+      status: true,
+      product: newProduct,
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      status: false,
+      message: "Error al actualizar el stock",
+    });
+  }
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
   createProduct,
   updateProduct,
   deleteProduct,
+  actualizarStock,
 };
