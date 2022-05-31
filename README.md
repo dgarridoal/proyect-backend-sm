@@ -45,7 +45,7 @@ _A petición de la problemática quines han realizado una solución es:_
 
 * **Matías Arriagada** - *Trabajo Inicial y documentación*
 * **Bryan Bauerle** - *Trabajo Inicial y documentación*
-* **Víctor Faundez** - *Trabajo Inicial y documentación*
+* **Víctor Faundez** - *Trabajo Inicial y documentación* - [VictorFaun](https://github.com/VictorFaun)
 * **Diego Garrido** - *Trabajo Inicial y documentación* - [dgarridoal](https://github.com/dgarridoal)
 * **Claudio Macher** - *Trabajo Inicial y documentación* - [ClaudioMacher](https://github.com/ClaudioMacher)
 
