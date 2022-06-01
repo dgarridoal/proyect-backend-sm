@@ -16,10 +16,10 @@ app.use(express.static('src'));
 
 
 bdConnect();
-app.use('/api/auth',require('./src/routes/auth'));
-app.use('/api/category',require('./src/routes/category'));
-app.use('/api/product',require('./src/routes/product'));
-app.use('/api/user',require('./src/routes/user'));
+app.use('/api/auth',require('./src/routes/Auth'));
+app.use('/api/category',require('./src/routes/Category'));
+app.use('/api/product',require('./src/routes/Product'));
+app.use('/api/user',require('./src/routes/User'));
 
 
 app.listen(PORT,()=>{
