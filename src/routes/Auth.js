@@ -4,6 +4,8 @@ const { check } = require("express-validator");
 
 const { login, register, changePassword } = require("../controllers/Auth");
 const { validarCampos } = require("../middlewares/validar-campos");
+const { validarJWT } = require("../middlewares/validar-jwt");
+
 
 /**
  * Ruta: /auth
@@ -18,6 +20,7 @@ router.post("/login",[
 router.post("/register", [
   check("email", "El email es obligatorio").isEmail().not().isEmpty(),
   check("password", "La contraseña es obligatoria").not().isEmpty(),
+  validarJWT,
   validarCampos
 ], register);
 
