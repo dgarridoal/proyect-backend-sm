@@ -23,7 +23,7 @@ fs.readdirSync(pathRouter).filter((file)=>{
 });
 
 router.use('*',(req,res)=>{
-    res.status(404).send({error:'Route Not found'});
+   return res.status(404).send({error:'Route Not found'});
 });
 
 

@@ -16,7 +16,7 @@ app.use(express.static('src'));
 
 
 bdConnect();
-app.use('/api',require('./routes/index.js'));
+app.use('/api',require('./routes/index'));
 
 
 app.listen(PORT,()=>{
