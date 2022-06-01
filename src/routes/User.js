@@ -2,7 +2,7 @@ const express=require('express');
 const router=express.Router();
 const {check}=require('express-validator');
 
-const { updateUser } = require('../Controllers/User');
+const { updateUser } = require('../controllers/user');
 
 /**
  * Ruta: /user

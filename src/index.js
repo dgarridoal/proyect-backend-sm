@@ -5,7 +5,7 @@ const cors=require('cors');
 
 const app = express();
 const PORT=process.env.PORT || 3000;
-const {bdConnect}=require('./src/config/database');
+const {bdConnect}=require('./config/database');
 
 
 app.use(cors());
@@ -16,7 +16,7 @@ app.use(express.static('src'));
 
 
 bdConnect();
-app.use('/api',require('./src/routes/index.js'));
+app.use('/api',require('./routes/index.js'));
 
 
 app.listen(PORT,()=>{

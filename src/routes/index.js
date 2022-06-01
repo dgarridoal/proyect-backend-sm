@@ -15,7 +15,7 @@ fs.readdirSync(pathRouter).filter((file)=>{
     const fileName=removeExtension(file);
     const skip=fileExcludes.includes(fileName);
     if (!skip) {
-        router.use(`/${fileName}`,require(`./${fileName}.js`));
+        router.use(`/${fileName}`,require(`./${fileName}`));
         console.log('Ruta cargada ---->', fileName);
     }
 
