@@ -5,7 +5,7 @@ const cors=require('cors');
 
 const app = express();
 const PORT=process.env.PORT || 3000;
-const {bdConnect}=require('./config/database');
+const {bdConnect}=require('./src/config/database');
 
 
 app.use(cors());
