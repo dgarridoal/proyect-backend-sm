@@ -15,7 +15,10 @@ app.use(express.urlencoded({ extended:true }));
 
 
 bdConnect();
-app.use('/api',require('./APP/Routes/index'));
+app.use('/api/auth',require('./APP/Routes/auth'));
+app.use('/api/category',require('./APP/Routes/category'));
+app.use('/api/product',require('./APP/Routes/product'));
+app.use('/api/user',require('./APP/Routes/user'));
 
 
 app.listen(PORT,()=>{
