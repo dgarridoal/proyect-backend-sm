@@ -24,6 +24,9 @@ const productSchema = Schema(
       type: Date,
       required: true,
     },
+    img:{
+      type: String,
+    },
     categoria: [
       {
         type: Schema.Types.ObjectId,

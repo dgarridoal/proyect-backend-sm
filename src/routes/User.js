@@ -1,16 +1,13 @@
-const express=require('express');
-const router=express.Router();
-const {check}=require('express-validator');
+const express = require("express");
+const router = express.Router();
 
-const { updateUser } = require('../controllers/User');
+const { validarJWT } = require("../middlewares/validar-jwt");
+const { updateUser } = require("../controllers/User");
 
 /**
- * Ruta: /user
+ * Route: /user
  */
 
-router.put('update/:id',[
-    check("email", "El email es obligatorio").not().isEmpty(),
-],updateUser);
-
+router.put("update/:id", [validarJWT], updateUser);
 
 module.exports = router;
