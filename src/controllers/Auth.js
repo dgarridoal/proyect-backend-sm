@@ -133,12 +133,9 @@ const renewToken = async (req, res) => {
     const { id } = req;
     const token = await generarJwt(id);
 
-    console.log(id);
-    const user = await userModel.findById(id);
     return res.status(200).json({
       status: true,
       token,
-      user
     });
   } catch (error) {
     return res.status(500).json({
