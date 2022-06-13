@@ -24,8 +24,8 @@ app.use('/api/auth',require('./src/routes/Auth'));
 app.use('/api/category',require('./src/routes/Category'));
 app.use('/api/product',require('./src/routes/Product'));
 app.use('/api/user',require('./src/routes/User'));
-app.use('/api/search',require('./src/routes/Search'));
-app.use('/api/upload',require('./src/routes/Upload'));
+app.use('/api/search',require('./src/routes/search'));
+app.use('/api/upload',require('./src/routes/upload'));
 
 // Start server
 app.listen(PORT,()=>{
