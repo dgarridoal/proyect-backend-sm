@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const { validarJWT } = require("../middlewares/validar-jwt");
-const { search, searchAll } =require("../controllers/search");
+const { search, searchAll } =require("../controllers/Search");
 
 /**
  * Route: /search
