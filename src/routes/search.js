@@ -8,8 +8,8 @@ const { search, searchAll } =require("../controllers/Search");
  * Route: /search
  */
 
-router.get("/:buscar", [], searchAll);
-router.get("/one/:coleccion/:buscar", [], search);
+router.get("/:buscar", [validarJWT], searchAll);
+router.get("/one/:coleccion/:buscar", [validarJWT], search);
 
 module.exports = router;
 
