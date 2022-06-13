@@ -128,8 +128,24 @@ const changePassword = async (req, res) => {
   }
 };
 
+const renewToken = async (req, res) => {
+  try {
+    const { id } = req;
+    const token = await generarJwt(id);
+    return res.status(200).json({
+      status: true,
+      token,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: false,
+      message: "Error al renovar el token",
+    });
+  }
+}
 module.exports = {
   login,
   register,
   changePassword,
+  renewToken
 };
