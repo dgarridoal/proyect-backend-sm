@@ -46,14 +46,16 @@ const getProductById = async (req, res) => {
 const createProduct = async (req, res) => {
   try {
     const { body } = req;
-    const product = new productModel(body);
-    await product.save();
-    if (!product) {
+    const productDB = new productModel(body);
+    await productDB.save();
+    if (!productDB) {
       return res.status(400).json({
         status: false,
         message: "Error al guardar el producto",
       });
     }
+    const product = await productModel.findOne({_id:productDB.id}).populate({path:'categoria',select:'nombre'});
+    
     return res.status(200).json({
       status: true,
       product,
