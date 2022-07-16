@@ -85,7 +85,7 @@ const register = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    const { nombre,apellido, email, password } = req.body;
+    const { nombre,apellido, email, password, newPassword } = req.body;
     await userModel.findOne({ email }, async (err, user) => {
       if (err) {
         return res.status(400).json({
@@ -110,8 +110,8 @@ const updateUser = async (req, res) => {
       user.nombre= nombre;
       user.apellido= apellido;
       user.email= email;
-      user.password = password;
-      await user.save((err, userStored) => {
+      user.password = newPassword;
+      await user.save(async (err, userStored) =>{
         if (err) {
           return res.status(400).json({
             status: false,
