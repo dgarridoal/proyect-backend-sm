@@ -42,7 +42,7 @@ router.put(
     check("email", "El email es obligatorio").isEmail().not().isEmpty(),
     validarCampos,
   ],
-  changePassword
+  updateUser
 );
 
 router.get("/renew-token", [], renewToken);
