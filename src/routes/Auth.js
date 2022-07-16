@@ -5,7 +5,7 @@ const { check } = require("express-validator");
 const {
   login,
   register,
-  changePassword,
+  updateUser,
   renewToken,
 } = require("../controllers/Auth");
 const { validarCampos } = require("../middlewares/validar-campos");
@@ -36,12 +36,10 @@ router.post(
   register
 );
 
-router.post(
-  "/change-password",
+router.put(
+  "/update-user",
   [
     check("email", "El email es obligatorio").isEmail().not().isEmpty(),
-    check("password", "La contraseña es obligatoria").not().isEmpty(),
-    check("newPassword", "La nueva contraseña es obligatoria").not().isEmpty(),
     validarCampos,
   ],
   changePassword
