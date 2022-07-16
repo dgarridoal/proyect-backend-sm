@@ -83,9 +83,9 @@ const register = async (req, res) => {
   }
 };
 
-const changePassword = async (req, res) => {
+const updateUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { nombre,apellido, email, password } = req.body;
     await userModel.findOne({ email }, async (err, user) => {
       if (err) {
         return res.status(400).json({
@@ -106,6 +106,10 @@ const changePassword = async (req, res) => {
           message: "La contraseña es incorrecta",
         });
       }
+
+      user.nombre= nombre;
+      user.apellido= apellido;
+      user.email= email;
       user.password = password;
       await user.save((err, userStored) => {
         if (err) {
@@ -114,9 +118,11 @@ const changePassword = async (req, res) => {
             message: "Error al guardar la contraseña del usuario",
           });
         }
+        const token = await generarJwt(user.id);
         return res.status(200).json({
           status: true,
           user: userStored,
+          token
         });
       });
     });
@@ -147,6 +153,6 @@ const renewToken = async (req, res) => {
 module.exports = {
   login,
   register,
-  changePassword,
+  updateUser,
   renewToken
 };
