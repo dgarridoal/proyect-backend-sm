@@ -26,6 +26,7 @@ app.use('/api/product',require('./src/routes/Product'));
 app.use('/api/user',require('./src/routes/User'));
 app.use('/api/search',require('./src/routes/search'));
 app.use('/api/upload',require('./src/routes/upload'));
+app.use('/api/order',require('./src/routes/order'));
 
 // Start server
 app.listen(PORT,()=>{
